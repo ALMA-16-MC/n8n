@@ -3,7 +3,7 @@ services:
     image: mariadb:10.5
     environment:
       - MARIADB_DATABASE=n8n
-      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
       - MARIADB_MYSQL_LOCALHOST_USER=true
     ports:
       - 3306:3306
@@ -14,7 +14,7 @@ services:
     image: mysql:8.4
     environment:
       - MYSQL_DATABASE=n8n
-      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - 3307:3306
     tmpfs:
@@ -26,7 +26,7 @@ services:
     environment:
       - POSTGRES_DB=n8n
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - 5432:5432
     tmpfs:
