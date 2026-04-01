@@ -14,7 +14,7 @@ describe('Data transformation expressions', () => {
 		ndv.actions.close();
 		addEditFields();
 
-		const input = '{{$json.myStr.toLowerCase() + " is " + "today".toUpperCase()';
+		const input = '{{$json.myStr.toLowerCase() + " is " + "today".toUpperCase()}}';
 		const output = 'monday is TODAY';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
@@ -30,7 +30,7 @@ describe('Data transformation expressions', () => {
 		ndv.actions.close();
 		addEditFields();
 
-		const input = '{{$json.myStr.extractEmail() + " " + $json.myStr.isEmpty()';
+		const input = '{{$json.myStr.extractEmail() + " " + $json.myStr.isEmpty()}}';
 		const output = 'hello@n8n.io false';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
@@ -46,7 +46,7 @@ describe('Data transformation expressions', () => {
 		ndv.actions.close();
 		addEditFields();
 
-		const input = '{{$json.myNum.toPrecision(3)';
+		const input = '{{$json.myNum.toPrecision(3)}}';
 		const output = '9.12';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
@@ -58,12 +58,12 @@ describe('Data transformation expressions', () => {
 
 	it('$json + n8n numeric methods', () => {
 		wf.actions.addInitialNodeToCanvas('Schedule Trigger', { keepNdvOpen: true });
-		ndv.actions.setPinnedData([{ myStr: 'hello@n8n.io is an email' }]);
+		ndv.actions.setPinnedData([{ myNum: 9.123 }]);
 		ndv.actions.close();
 		addEditFields();
 
-		const input = '{{$json.myStr.extractEmail() + " " + $json.myStr.isEmpty()';
-		const output = 'hello@n8n.io false';
+		const input = '{{$json.myNum.round()}}';
+		const output = '9';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
 		ndv.getters.inlineExpressionEditorOutput().should('have.text', output);
@@ -77,7 +77,8 @@ describe('Data transformation expressions', () => {
 		ndv.actions.setPinnedData([{ myArr: [1, 2, 3] }]);
 		ndv.actions.close();
 		addEditFields();
-		const input = '{{$json.myArr.includes(1) + " " + $json.myArr[2]';
+
+		const input = '{{$json.myArr.includes(1) + " " + $json.myArr[2]}}';
 		const output = 'true 3';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
@@ -93,7 +94,7 @@ describe('Data transformation expressions', () => {
 		ndv.actions.close();
 		addEditFields();
 
-		const input = '{{$json.myArr.first() + " " + $json.myArr.last()';
+		const input = '{{$json.myArr.first() + " " + $json.myArr.last()}}';
 		const output = '1 3';
 
 		ndv.getters.inlineExpressionEditorInput().clear().type(input);
@@ -105,7 +106,7 @@ describe('Data transformation expressions', () => {
 });
 
 // ----------------------------------
-//             utils
+// utils
 // ----------------------------------
 
 const addEditFields = () => {
